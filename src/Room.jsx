@@ -1,10 +1,19 @@
 import { MeshReflectorMaterial, useGLTF, useTexture } from '@react-three/drei'
+import { useFrame, useThree } from '@react-three/fiber'
+import { clamp } from 'three/src/math/MathUtils.js'
 
 export default function Room() {
   const { nodes } = useGLTF('./modern-living-room.glb')
   const bakedTexture = useTexture('./baked.jpg')
   bakedTexture.flipY = false
-
+  const { width } = useThree((state) => state.viewport)
+  useFrame((state, delta) => {
+    if (state.viewport.width <= 3.8) {
+      state.camera.fov = 75
+    } else {
+      state.camera.fov = 45
+    }
+  })
   return (
     <>
       <group position-y={-0.5} dispose={null}>
