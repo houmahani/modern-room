@@ -21,7 +21,7 @@ export default function Room() {
           <planeGeometry args={[0.62, 1.09, 10, 10]} />
 
           <MeshReflectorMaterial
-            resolution={4096}
+            resolution={512}
             mirror={0.8}
             blur={[600, 600]}
             mixBlur={2}
