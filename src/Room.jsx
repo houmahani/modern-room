@@ -17,7 +17,7 @@ export default function Room() {
           <meshStandardMaterial map={bakedTexture} />
         </mesh>
 
-        {/* <mesh position={[-0.89, 0.54, 0.835]} rotation={[1.61, 1.74, 1.53]}>
+        <mesh position={[-0.89, 0.54, 0.835]} rotation={[1.61, 1.74, 1.53]}>
           <planeGeometry args={[0.62, 1.09, 10, 10]} />
 
           <MeshReflectorMaterial
@@ -32,7 +32,7 @@ export default function Room() {
             roughness={0.9}
             color={'#f7ebdf'}
           />
-        </mesh> */}
+        </mesh>
 
         <mesh
           geometry={nodes.candle.geometry}
