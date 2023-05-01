@@ -1,4 +1,4 @@
-import { Center, PresentationControls, useGLTF, useTexture } from '@react-three/drei'
+import { MeshReflectorMaterial, useGLTF, useTexture } from '@react-three/drei'
 
 export default function Room() {
   const { nodes } = useGLTF('./modern-living-room.glb')
@@ -6,38 +6,53 @@ export default function Room() {
   bakedTexture.flipY = false
 
   return (
-    <PresentationControls zoom={0.8} polar={[-0.4, 0.4]} azimuth={[-0.5, 0.5]}>
-      <Center>
-        <mesh geometry={nodes.baked.geometry} scale={0.3}>
-          <meshBasicMaterial map={bakedTexture} />
-        </mesh>
+    <>
+      <group position-y={-0.5} dispose={null}>
         <mesh
-          geometry={nodes.window.geometry}
+          geometry={nodes.baked.geometry}
           scale={0.3}
-          position={[-0.05, -0.05, nodes.window.position.z]}
+          position={[nodes.baked.position.x, nodes.baked.position.y, nodes.baked.position.z]}
+          rotation={nodes.baked.rotation}
         >
-          <meshBasicMaterial color={'#FFA868'} />
+          <meshStandardMaterial map={bakedTexture} />
+        </mesh>
+
+        <mesh position={[-0.89, 0.54, 0.835]} rotation={[1.61, 1.74, 1.53]}>
+          <planeGeometry args={[0.62, 1.09, 10, 10]} />
+
+          <MeshReflectorMaterial
+            resolution={4096}
+            mirror={0.8}
+            blur={[600, 600]}
+            mixBlur={2}
+            depthScale={0.4}
+            minDepthThreshold={1.5}
+            maxDepthThreshold={1}
+            reflectorOffset={0.05}
+            roughness={0.9}
+            color={'#f7ebdf'}
+          />
         </mesh>
 
         <mesh
-          geometry={nodes.window.geometry}
-          scale={0.3}
-          position={[-0.05, nodes.window.position.z, nodes.window.position.z]}
+          geometry={nodes.candle.geometry}
+          scale={4}
+          position={[0.108, 0.242, -0.1435]}
+          rotation={nodes.candle.rotation}
         >
-          <meshBasicMaterial color={'#FFA868'} />
+          <meshStandardMaterial color={'#FFA53F'} />
         </mesh>
 
-        {/* <mesh
-        geometry={nodes.Glass.geometry}
-        position={nodes.Glass.position}
-        scale={0.3}
-        rotation-x={Math.PI * 0.5}
-        rotation-y={Math.PI * 2}
-      >
-        <meshBasicMaterial color={'#FFA868'} />
-      </mesh> */}
-      </Center>
-    </PresentationControls>
+        <mesh
+          geometry={nodes.candle001.geometry}
+          scale={5}
+          position={[0.123, 0.25, -0.159]}
+          rotation={nodes.candle001.rotation}
+        >
+          <meshStandardMaterial color={'#FFA53F'} />
+        </mesh>
+      </group>
+    </>
   )
 }
 
