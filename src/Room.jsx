@@ -57,5 +57,3 @@ export default function Room() {
     </>
   )
 }
-
-useGLTF.preload('./modern-living-room-draco.glb')
